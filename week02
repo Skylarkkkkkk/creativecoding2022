@@ -1,0 +1,21 @@
+void setup() 
+{ 
+  size(800, 600); 
+  ellipseMode(CENTER); 
+  noFill(); 
+  background(0); 
+  stroke(255); 
+  //smooth(); 
+} 
+ 
+void draw() 
+{ 
+  background(0); 
+  int maximum_radius = int(dist(0, height/2, width, height)); 
+  int density = int(constrain(mouseX,10, width)); 
+  for(int i=density; i<=maximum_radius; i+=density) { 
+    rect(0,0, i, i); 
+    ellipse(width, height, 2*i, i); 
+    
+  } 
+} 
