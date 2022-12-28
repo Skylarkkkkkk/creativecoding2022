@@ -1,0 +1,47 @@
+class Particle {
+  PVector pos;
+  ArrayList<PVector> trace;
+
+  //float scaleSize = 2;
+
+  Particle(PVector p) {
+    pos = p;
+
+    pos.mult(scaleSize);
+    pos.sub(new PVector(width*(scaleSize-1), height*(scaleSize-1)));
+
+    trace = new ArrayList<PVector>();
+    trace.add(new PVector(pos.x, pos.y));
+  }
+
+  void run() {
+    if (pos.x >=0 && pos.x <= width && pos.y >=0 && pos.y <= height) {
+      move();
+    }
+    display();
+  }
+
+  void display() {
+    //stroke(random(255),random(255),random(255));
+    fill(random(255), random(255), random(255), random(100));
+    noStroke();
+    //  strokeWeight(random(10));
+    //point(pos.x, pos.y);
+    beginShape();
+    for (int i = 0; i < trace.size(); i ++) {
+      vertex(trace.get(i).x, trace.get(i).y);
+      ellipse(trace.get(i).x, trace.get(i).y, random(1), random(20));
+    }
+    endShape();
+  }
+
+  void move() {
+
+    PVector v = PVector.sub(pos, new PVector(width/random(5), height/random(5)));
+    v.normalize().mult(2);
+
+    pos.add(v);
+
+    trace.add(new PVector(pos.x, pos.y));
+  }
+}
